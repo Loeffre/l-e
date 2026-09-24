@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Печатающийся текст</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        .typing-text {
+            color: #ffffff;
+            font-size: 2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #ffffff;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret 0.75s step-end infinite;
+            max-width: 90vw;
+        }
+
+        /* Анимация печати */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Мигающий курсор */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #ffffff }
+        }
+
+        @media (max-width: 600px) {
+            .typing-text {
+                font-size: 1.2rem;
+                white-space: normal;
+                border-right: none;
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- ✏️ ЗДЕСЬ МЕНЯЙ ТЕКСТ (между тегами <span>) -->
+    <!-- ============================================ -->
+    <div class="typing-text">Привет! Я твой текст ✨</div>
+    <!-- ============================================ -->
+
+</body>
+</html>
