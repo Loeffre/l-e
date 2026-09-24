@@ -18,19 +18,34 @@
             justify-content: center;
             align-items: center;
             font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Блок среднего размера по центру */
+        .typing-container {
+            width: 100%;
+            max-width: 550px;        /* ← ширина блока */
+            min-height: 400px;        /* ← высота блока */
+            padding: 30px;
+            border: 1px solid #333;   /* тонкая рамка (можно убрать) */
+            border-radius: 12px;
+            background-color: #0a0a0a; /* чуть светлее фона */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .typing-text {
             color: #ffffff;
-            font-size: 2rem;
-            white-space: nowrap;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            white-space: pre-wrap;    /* сохраняет переносы строк */
             overflow: hidden;
-            border-right: 3px solid #ffffff;
+            border-right: 2px solid #ffffff;
+            width: 0;
             animation: 
-                typing 3.5s steps(40, end),
+                typing 8s steps(200, end) forwards,
                 blink-caret 0.75s step-end infinite;
-            max-width: 90vw;
         }
 
         /* Анимация печати */
@@ -46,22 +61,32 @@
         }
 
         @media (max-width: 600px) {
+            .typing-container {
+                max-width: 100%;
+                min-height: auto;
+                padding: 20px;
+            }
             .typing-text {
-                font-size: 1.2rem;
-                white-space: normal;
-                border-right: none;
-                animation: none;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================ -->
-    <!-- ✏️ ЗДЕСЬ МЕНЯЙ ТЕКСТ (между тегами <span>) -->
-    <!-- ============================================ -->
-    <div class="typing-text">Привет! Я твой текст ✨</div>
-    <!-- ============================================ -->
+    <div class="typing-container">
+        <!-- ============================================ -->
+        <!-- ✏️ ЗДЕСЬ МЕНЯЙ ТЕКСТ (между тегами <div>) -->
+        <!-- ============================================ -->
+        <div class="typing-text">Привет, дорогой друг!
+
+Это мой первый текст, который печатается сам, словно я сижу за старой печатной машинкой.
+
+Здесь можно написать всё, что угодно: историю, признание, стихотворение или просто мысли.
+
+Просто замени этот текст на свой — и он появится с той же красивой анимацией ✨</div>
+        <!-- ============================================ -->
+    </div>
 
 </body>
 </html>
