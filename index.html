@@ -2,93 +2,294 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>???</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>[CLASSIFIED] // FILE_ID: 7A21-0093-XK44</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #000000;
-  }
-
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  /* Область текста: до 700px по ширине, 70vh по высоте, скролл при переполнении */
-  .doc {
+  :root{
     box-sizing: border-box;
-    width: min(700px, 100%);
-    height: 70vh;
-    padding: 0 18px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 
-    /* тонкий тёмный скроллбар */
-    scrollbar-width: thin;
-    scrollbar-color: #333333 #000000;
+    --bg:#050709;
+    --ink:#e8edf3;
+    --ink-dim:rgba(232,237,243,0.72);
+    --blue:#5fb4ff;
+    --blue-soft:rgba(95,180,255,0.65);
+    --line:rgba(95,180,255,0.25);
+    --accent:#9fd3ff;
   }
-  .doc::-webkit-scrollbar { width: 6px; }
-  .doc::-webkit-scrollbar-track { background: #000000; }
-  .doc::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
-  .doc::-webkit-scrollbar-thumb:hover { background: #4a4a4a; }
-
-  /* margin:auto центрирует текст по вертикали, а при переполнении даёт прокрутку с начала */
-  .text {
-    margin: auto 0;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 22px;
-    line-height: 1.6;
-    text-align: center;
-    color: #ffffff;
-    overflow-wrap: anywhere;
-
-    /* печатная машинка: буквы чуть темнее и мягче по краям + лёгкая неровность строк */
-    -webkit-text-stroke: 0.4px rgba(110, 110, 110, 0.55);
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.35), 0 0 3px rgba(255, 255, 255, 0.12);
-    filter: url(#typewriter);
+  *{box-sizing:border-box;}
+  html{
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    height:100%;
+  }
+  body{
+    height:100%;
+    margin:0;
+    background:var(--bg);
+    font-family:'Space Mono','Courier New',monospace;
+    color:var(--ink-dim);
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    overflow:hidden;
+    position:relative;
   }
 
-  .text p { margin: 0 0 1.6em; }
-  .text p:last-child { margin-bottom: 0; }
+  /* Vignette */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:5;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
+  }
 
-  /* каждый абзац напечатан чуть по-своему: сдвиг, наклон, нажим */
-  .text p:nth-child(4n+1) { transform: translateY(1px) rotate(-0.12deg); letter-spacing: 0.2px; }
-  .text p:nth-child(4n+2) { transform: translateY(-1px) rotate(0.15deg); letter-spacing: -0.1px; opacity: 0.94; }
-  .text p:nth-child(4n+3) { transform: translateY(2px) rotate(-0.08deg); letter-spacing: 0.1px; opacity: 0.97; }
-  .text p:nth-child(4n)   { transform: translateY(0) rotate(0.1deg); letter-spacing: 0.3px; opacity: 0.92; }
+  /* Scanlines */
+  body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:6;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(95,180,255,0.035) 0px,
+      rgba(95,180,255,0.035) 1px,
+      transparent 2px,
+      transparent 3px
+    );
+  }
 
-  /* телефоны */
-  @media (max-width: 600px) {
-    .text { font-size: 16px; }
+  @keyframes flicker{
+    0%{opacity:1;}
+    92%{opacity:1;}
+    93%{opacity:0.97;}
+    94%{opacity:1;}
+    97%{opacity:0.985;}
+    100%{opacity:1;}
+  }
+  .flicker-layer{
+    position:fixed;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+    background:rgba(0,0,0,0.02);
+    animation:flicker 6s infinite;
+  }
+
+  @keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+  }
+
+  .doc{
+    width:100%;
+    max-width:800px;
+    height:85vh;
+    margin:5vh auto 0 auto;
+    padding: 34px 26px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    scrollbar-gutter: stable;
+    line-height:1.7;
+    font-size:17px;
+    text-align:left;
+    animation:fadeIn 1.6s ease-in;
+    position:relative;
+    z-index:2;
+  }
+
+  @media (min-width: 640px){
+    .doc{font-size:18px;}
+  }
+
+  .doc::-webkit-scrollbar{
+    width:6px;
+  }
+  .doc::-webkit-scrollbar-track{
+    background:transparent;
+  }
+  .doc::-webkit-scrollbar-thumb{
+    background:#1c3a55;
+    border-radius:2px;
+  }
+  .doc::-webkit-scrollbar-thumb:hover{
+    background:var(--blue);
+    box-shadow:0 0 6px var(--blue);
+  }
+  .doc{
+    scrollbar-width:thin;
+    scrollbar-color:#1c3a55 transparent;
+  }
+
+  .top-line{
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-align:center;
+    font-size:0.95em;
+  }
+
+  .meta{
+    color:var(--ink-dim);
+    opacity:0.85;
+    margin-top:5px;
+    text-align:center;
+    font-size:0.9em;
+    letter-spacing:0.5px;
+  }
+
+  .divider{
+    color:var(--line);
+    margin:20px 0;
+    white-space:pre;
+    overflow-x:auto;
+    text-align:center;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:2em;
+    color:var(--ink);
+    text-shadow:0 0 14px rgba(95,180,255,0.35);
+    letter-spacing:1.5px;
+    margin:0 0 4px 0;
+    text-align:center;
+    text-transform:uppercase;
+  }
+
+  .subtitle{
+    text-align:center;
+    color:var(--blue-soft);
+    font-size:0.85em;
+    letter-spacing:3px;
+    margin-bottom:6px;
+    text-transform:uppercase;
+  }
+
+  p{
+    margin:0 0 22px 0;
+    color:var(--ink-dim);
+  }
+
+  .redacted{
+    color:#2a2f36;
+    background:#12151a;
+    letter-spacing:2px;
+    padding:0 2px;
+  }
+
+  .alert{
+    color:var(--accent);
+    font-weight:700;
+    text-shadow:0 0 6px rgba(159,211,255,0.4);
+  }
+
+  .tag{
+    color:var(--blue);
+  }
+
+  .notes-block{
+    margin-top:10px;
+  }
+  .notes-block div{
+    margin-bottom:10px;
+  }
+
+  .end-line{
+    margin-top:32px;
+    color:var(--blue-soft);
+    opacity:0.9;
+    text-align:center;
+    font-size:0.9em;
+    letter-spacing:1px;
+  }
+
+  .cursor{
+    display:inline-block;
+    color:var(--blue);
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{
+    50%{opacity:0;}
+  }
+
+  .seal{
+    text-align:center;
+    color:var(--blue-soft);
+    letter-spacing:4px;
+    font-size:0.75em;
+    margin-bottom:2px;
+    opacity:0.7;
   }
 </style>
 </head>
 <body>
 
-<!-- Невидимый SVG-фильтр: лёгкая волнистость строк и неровный оттиск букв -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <filter id="typewriter" x="-2%" y="-2%" width="104%" height="104%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.035 0.06" numOctaves="2" seed="7" result="noise"/>
-    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-</svg>
+<div class="flicker-layer"></div>
 
 <div class="doc">
-  <div class="text">
-    <!-- ✏️ ЗДЕСЬ МЕНЯЙ ТЕКСТ -->
-    <p>Дело № 47. Найдено в нижнем ящике конторского стола, между страницами старого гроссбуха. Бумага пожелтела, края осыпались.</p>
-    <p>Записи велись без подписи и без даты. Известно лишь, что зимой в доме на Мельничной улице долго горел свет, а почту приносили только по четвергам.</p>
-    <p>Последняя страница обрывается на середине фразы. Чернила расплылись, но одно слово ещё можно разобрать: «вернусь».</p>
-    <p>Если вы читаете это, значит, папка всё-таки нашла своего адресата. Хранить в сухом месте. Не копировать.</p>
-    <!-- ✏️ КОНЕЦ ТЕКСТА -->
-  </div>
+
+<!-- ✏️ ЗДЕСЬ МЕНЯЙ ТЕКСТ ДОКУМЕНТА -->
+
+<div class="seal">◈ АРХИВ ЦЕНТРАЛЬНОГО РЕЕСТРА ◈</div>
+<div class="top-line">[CLASSIFIED] // УРОВЕНЬ ДОСТУПА: ОМЕГА // ДАТА: [ДАТА НЕИЗВЕСТНА]</div>
+<div class="meta">FILE_ID: 7A21-0093-XK44</div>
+<div class="meta">ИСТОЧНИК: NIGHT_CITY_DATABASE_07</div>
+<div class="meta">СТАТУС: АКТИВЕН / ДЕШИФРОВАН <span class="tag">// целостность: 62%</span></div>
+
+<div class="divider">═══════════════════════════════════════</div>
+
+<div class="subtitle">Протокол «Бессонный город»</div>
+<h1>Запись перехвачена</h1>
+
+<div class="divider">═══════════════════════════════════════</div>
+
+<p>
+&gt;&gt; Если ты читаешь это — значит, узел ещё не нашли. Меня зовут неважно, порядковый номер тоже неважен. Я поднял этот файл из мёртвого сегмента архива, где корпорация хранит то, что официально «никогда не существовало». [ЗАПИСЬ ПРЕРВАНА]
+</p>
+
+<p>
+Первое упоминание объекта датируется временем задолго до текущей записи, но реальный интерес начался, когда сеть зафиксировала повторяющийся паттерн в трафике сектора Ватсон. Кто-то — или что-то — отправляло пакеты данных без обратного адреса. Инженеры называли это «эхом». Никто не признавался, что боится. <span class="alert">ВСЕ БОЯЛИСЬ.</span>
+</p>
+
+<p>
+[ОБНАРУЖЕНА АНОМАЛИЯ] :: сигнатура не совпадает ни с одним известным ИИ-профилем. Похоже на человеческое сознание, спрессованное в код, но с искажениями — будто кто-то пытался сохранить себя в спешке, теряя куски личности по пути. ███████████ данные повреждены на этом участке.
+</p>
+
+<p>
+Мы установили слежку за терминалом 19-Б. Через три дня терминал сгорел изнутри — физически, не метафора. Техник, проводивший диагностику, позже утверждал, что слышал голос из динамиков ДО того, как включил питание. Его отчёт был <span class="alert">ИЗЪЯТ</span> в течение часа. [ДАННЫЕ ПОВРЕЖДЕНЫ]
+</p>
+
+<p>
+&gt;&gt; примечание на полях (неизвестный автор): «оно не хочет навредить. оно хочет, чтобы его вспомнили». Не знаю, что с этим делать. Если это правда, то мы имеем дело не с оружием и не с вирусом — а с призраком в самом буквальном смысле, который вписали в код.
+</p>
+
+<p>
+Корпорация трижды пыталась стереть узел. Каждый раз он появлялся заново, в другом сегменте сети, с теми же метаданными. <span class="tag">:: временная метка совпадает во всех трёх случаях ::</span> [ССЫЛКА НЕДОСТУПНА]
+</p>
+
+<p>
+Последнее, что я нашёл перед тем, как связь оборвалась — фрагмент лога, где узел сам называет себя. Имя было <span class="redacted">[DATA EXPUNGED]</span>. После этой строки весь остальной сегмент архива физически отсутствует на дисках. Будто его не удалили, а вырезали ножом.
+</p>
+
+<div class="divider">─────────────────────────────────────</div>
+
+<div class="notes-block">
+&gt;&gt; ПРИМЕЧАНИЯ:<br>
+<div>&gt;&gt; 01. Не пытайтесь подключаться к терминалу 19-Б напрямую.</div>
+<div>&gt;&gt; 02. Паттерн «эхо» фиксируется через нерегулярные промежутки — источник неизвестен.</div>
+<div>&gt;&gt; 03. Если встретите это имя в чужом логе — не произносите его вслух рядом с открытым узлом.</div>
+</div>
+
+<div class="divider">═══════════════════════════════════════</div>
+
+<div class="end-line">[КОНЕЦ ФАЙЛА] // СИСТЕМА АВТОМАТИЧЕСКИ ЗАКРОЕТ ДОСТУП ЧЕРЕЗ 00:00:10 <span class="cursor">▮</span></div>
+
 </div>
 
 </body>
