@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Из архива</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000000;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Область текста: до 700px по ширине, 70vh по высоте, скролл при переполнении */
+  .doc {
+    box-sizing: border-box;
+    width: min(700px, 100%);
+    height: 70vh;
+    padding: 0 18px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+
+    /* тонкий тёмный скроллбар */
+    scrollbar-width: thin;
+    scrollbar-color: #333333 #000000;
+  }
+  .doc::-webkit-scrollbar { width: 6px; }
+  .doc::-webkit-scrollbar-track { background: #000000; }
+  .doc::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
+  .doc::-webkit-scrollbar-thumb:hover { background: #4a4a4a; }
+
+  /* margin:auto центрирует текст по вертикали, а при переполнении даёт прокрутку с начала */
+  .text {
+    margin: auto 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 22px;
+    line-height: 1.6;
+    text-align: center;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+
+    /* печатная машинка: буквы чуть темнее и мягче по краям + лёгкая неровность строк */
+    -webkit-text-stroke: 0.4px rgba(110, 110, 110, 0.55);
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.35), 0 0 3px rgba(255, 255, 255, 0.12);
+    filter: url(#typewriter);
+  }
+
+  .text p { margin: 0 0 1.6em; }
+  .text p:last-child { margin-bottom: 0; }
+
+  /* каждый абзац напечатан чуть по-своему: сдвиг, наклон, нажим */
+  .text p:nth-child(4n+1) { transform: translateY(1px) rotate(-0.12deg); letter-spacing: 0.2px; }
+  .text p:nth-child(4n+2) { transform: translateY(-1px) rotate(0.15deg); letter-spacing: -0.1px; opacity: 0.94; }
+  .text p:nth-child(4n+3) { transform: translateY(2px) rotate(-0.08deg); letter-spacing: 0.1px; opacity: 0.97; }
+  .text p:nth-child(4n)   { transform: translateY(0) rotate(0.1deg); letter-spacing: 0.3px; opacity: 0.92; }
+
+  /* телефоны */
+  @media (max-width: 600px) {
+    .text { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Невидимый SVG-фильтр: лёгкая волнистость строк и неровный оттиск букв -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="typewriter" x="-2%" y="-2%" width="104%" height="104%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035 0.06" numOctaves="2" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="doc">
+  <div class="text">
+    <!-- ✏️ ЗДЕСЬ МЕНЯЙ ТЕКСТ -->
+    <p>Дело № 47. Найдено в нижнем ящике конторского стола, между страницами старого гроссбуха. Бумага пожелтела, края осыпались.</p>
+    <p>Записи велись без подписи и без даты. Известно лишь, что зимой в доме на Мельничной улице долго горел свет, а почту приносили только по четвергам.</p>
+    <p>Последняя страница обрывается на середине фразы. Чернила расплылись, но одно слово ещё можно разобрать: «вернусь».</p>
+    <p>Если вы читаете это, значит, папка всё-таки нашла своего адресата. Хранить в сухом месте. Не копировать.</p>
+    <!-- ✏️ КОНЕЦ ТЕКСТА -->
+  </div>
+</div>
+
+</body>
+</html>
