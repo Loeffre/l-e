@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Печатающийся текст</title>
+    <title>Текст по центру</title>
     <style>
         * {
             margin: 0;
@@ -21,17 +21,14 @@
             padding: 20px;
         }
 
-        /* Блок среднего размера по центру */
         .typing-container {
             width: 100%;
-            max-width: 600px;         /* ширина блока */
-            height: 450px;            /* фиксированная высота блока */
-            padding: 30px;
-            border: 1px solid #333;
-            border-radius: 12px;
-            background-color: #0a0a0a;
-            overflow-y: auto;         /* ← скролл внутри блока */
+            max-width: 700px;
+            height: 70vh;
+            overflow-y: auto;
             overflow-x: hidden;
+            padding: 20px 30px;
+            text-align: center;
         }
 
         /* Кастомный скроллбар */
@@ -39,8 +36,7 @@
             width: 8px;
         }
         .typing-container::-webkit-scrollbar-track {
-            background: #0a0a0a;
-            border-radius: 10px;
+            background: #000000;
         }
         .typing-container::-webkit-scrollbar-thumb {
             background: #444;
@@ -52,38 +48,18 @@
 
         .typing-text {
             color: #ffffff;
-            font-size: 30px;          /* ← размер текста */
+            font-size: 30px;
             line-height: 1.6;
-            white-space: pre-wrap;    /* сохраняет переносы строк */
+            white-space: pre-wrap;
             word-wrap: break-word;
-            overflow: hidden;
-            border-right: 2px solid #ffffff;
-            display: inline-block;
-            animation: 
-                typing 10s steps(300, end) forwards,
-                blink-caret 0.75s step-end infinite;
-        }
-
-        /* Анимация печати */
-        @keyframes typing {
-            from { max-width: 0 }
-            to { max-width: 100% }
-        }
-
-        /* Мигающий курсор */
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #ffffff }
         }
 
         @media (max-width: 700px) {
-            .typing-container {
-                max-width: 100%;
-                height: 70vh;
-                padding: 20px;
-            }
             .typing-text {
                 font-size: 20px;
+            }
+            .typing-container {
+                padding: 15px;
             }
         }
     </style>
@@ -96,13 +72,11 @@
         <!-- ============================================ -->
         <div class="typing-text">Привет, дорогой друг!
 
-Это мой первый текст, который печатается сам, словно я сижу за старой печатной машинкой.
+Это мой текст, который ровно по центру экрана.
 
-Здесь можно написать всё, что угодно: историю, признание, стихотворение или просто мысли. Просто замени этот текст на свой — и он появится с той же красивой анимацией ✨
+Здесь можно написать всё, что угодно: историю, признание, стихотворение или просто мысли.
 
-Если текста станет слишком много и он не поместится в блок — справа появится скроллбар, и можно будет прокрутить текст вниз.
-
-Приятного чтения! 💫</div>
+Если текста станет много — справа появится скроллбар, и можно будет прокрутить вниз.</div>
         <!-- ============================================ -->
     </div>
 
