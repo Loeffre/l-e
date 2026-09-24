@@ -24,34 +24,50 @@
         /* Блок среднего размера по центру */
         .typing-container {
             width: 100%;
-            max-width: 550px;        /* ← ширина блока */
-            min-height: 400px;        /* ← высота блока */
+            max-width: 600px;         /* ширина блока */
+            height: 450px;            /* фиксированная высота блока */
             padding: 30px;
-            border: 1px solid #333;   /* тонкая рамка (можно убрать) */
+            border: 1px solid #333;
             border-radius: 12px;
-            background-color: #0a0a0a; /* чуть светлее фона */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: #0a0a0a;
+            overflow-y: auto;         /* ← скролл внутри блока */
+            overflow-x: hidden;
+        }
+
+        /* Кастомный скроллбар */
+        .typing-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .typing-container::-webkit-scrollbar-track {
+            background: #0a0a0a;
+            border-radius: 10px;
+        }
+        .typing-container::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 10px;
+        }
+        .typing-container::-webkit-scrollbar-thumb:hover {
+            background: #666;
         }
 
         .typing-text {
             color: #ffffff;
-            font-size: 1.15rem;
-            line-height: 1.8;
+            font-size: 30px;          /* ← размер текста */
+            line-height: 1.6;
             white-space: pre-wrap;    /* сохраняет переносы строк */
+            word-wrap: break-word;
             overflow: hidden;
             border-right: 2px solid #ffffff;
-            width: 0;
+            display: inline-block;
             animation: 
-                typing 8s steps(200, end) forwards,
+                typing 10s steps(300, end) forwards,
                 blink-caret 0.75s step-end infinite;
         }
 
         /* Анимация печати */
         @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
+            from { max-width: 0 }
+            to { max-width: 100% }
         }
 
         /* Мигающий курсор */
@@ -60,14 +76,14 @@
             50% { border-color: #ffffff }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             .typing-container {
                 max-width: 100%;
-                min-height: auto;
+                height: 70vh;
                 padding: 20px;
             }
             .typing-text {
-                font-size: 1rem;
+                font-size: 20px;
             }
         }
     </style>
@@ -82,9 +98,11 @@
 
 Это мой первый текст, который печатается сам, словно я сижу за старой печатной машинкой.
 
-Здесь можно написать всё, что угодно: историю, признание, стихотворение или просто мысли.
+Здесь можно написать всё, что угодно: историю, признание, стихотворение или просто мысли. Просто замени этот текст на свой — и он появится с той же красивой анимацией ✨
 
-Просто замени этот текст на свой — и он появится с той же красивой анимацией ✨</div>
+Если текста станет слишком много и он не поместится в блок — справа появится скроллбар, и можно будет прокрутить текст вниз.
+
+Приятного чтения! 💫</div>
         <!-- ============================================ -->
     </div>
 
